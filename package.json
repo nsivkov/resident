@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.23.0",
+    "chromedriver": "^94.0.0",
     "jest": "^27.2.5",
     "jest-junit": "^13.0.0",
     "jest-html-reporters": "^2.1.6",

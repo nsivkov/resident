@@ -1,34 +1,34 @@
-const {Builder, By, Key} = require('selenium-webdriver')
+const driver = require('../utils/driver-factory');
 const props = require('../const/props');
+const HomePage = require('../pages/home-page');
+const SignInPage = require('../pages/sign-in-page');
+const MyAccountPage = require('../pages/my-account-page');
 
 describe('UI tests', () => {
 
-    let driver;
     jest.setTimeout(30000)
 
     beforeEach(async () => {
-        driver = await new Builder()
-            .forBrowser('chrome')
-            .build();
-        driver.manage().window().maximize();
         await driver.get(props.ui.baseUrl);
-        await driver.findElement(By.className('login')).click();
-        await driver.findElement(By.id('email')).sendKeys(props.ui.email);
-        await driver.findElement(By.id('passwd')).sendKeys(props.ui.passwd, Key.RETURN);
-        expect(await driver.findElement(By.className('account')).isDisplayed()).toBe(true);
+        await HomePage.clickSignIn();
+        await SignInPage.setEmail(props.ui.email);
+        await SignInPage.setPassword(props.ui.passwd);
+        await SignInPage.clickAuthenticationSignIn();
+        expect(await MyAccountPage.isUserNameVisible()).toBe(true);
     }, 30000);
 
     test('Logout test action by UI', async () => {
-        await driver.findElement(By.className('logout')).click();
-        expect(await driver.findElement(By.className('login')).isDisplayed()).toBe(true);
+        await MyAccountPage.clickLogOut();
+        expect(await SignInPage.isHeaderSignInVisible()).toBe(true);
     });
 
     test('Logout test action by /account/logout/', async () => {
         await driver.get(props.ui.baseUrl + "/index.php?mylogout=");
-        expect(await driver.findElement(By.className('login')).isDisplayed()).toBe(true);
+        expect(await SignInPage.isHeaderSignInVisible()).toBe(true);
     });
 
     afterEach(async () => {
         await driver.quit();
     }, 30000);
+
 });
