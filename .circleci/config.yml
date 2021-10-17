@@ -29,9 +29,9 @@ jobs:
           name: Run tests
           command: npm test
       - store_test_results:
-          path: ./jest_html_reporters.html
+          path: ./junit.xml
       - store_artifacts:
-          path: ./jest_html_reporters.html
+          path: ./junit.xml
 
 workflows:
   test:
