@@ -1,0 +1,23 @@
+{
+  "name": "resident",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tests/api-op1.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-html-reporters"
+    ]
+  },
+  "author": "Nikita Sivkov",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.23.0",
+    "jest": "^27.2.5",
+    "jest-html-reporters": "^2.1.6",
+    "selenium-webdriver": "^4.0.0"
+  }
+}
