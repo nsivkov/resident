@@ -11,15 +11,19 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
-          name: check chrome install
+          name: Check chrome install
           command: |
             google-chrome --version
             chromedriver --version
       - run:
-          name: install dependencies
-          command: npm install
+          name: Install dependencies
+          command: |
+            ls
+            cd ..
+            ls
+            npm install
       - run:
-          name: run tests
+          name: Run tests
           command: npm test
 
 workflows:
