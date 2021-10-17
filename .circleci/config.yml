@@ -1,0 +1,21 @@
+version: '2.1'
+orbs:
+  browser-tools: circleci/browser-tools@x.y
+jobs:
+  test:
+    docker:
+      - image: 'cimg/node:13.12-browser'
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: check chrome install
+          command: |
+            google-chrome --version
+            chromedriver --version
+      - run:
+          name: install dependencies
+          command: npm install
+      - run:
+          name: run tests
+          command: npm test
