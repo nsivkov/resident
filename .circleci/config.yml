@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: 'cimg/node:16.11.1-browsers'
     steps:
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
@@ -17,11 +18,7 @@ jobs:
             chromedriver --version
       - run:
           name: Install dependencies
-          command: |
-            ls
-            cd ..
-            ls
-            npm install
+          command: npm install
       - run:
           name: Run tests
           command: npm test
